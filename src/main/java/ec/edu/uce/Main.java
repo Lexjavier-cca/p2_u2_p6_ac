@@ -1,4 +1,4 @@
-package ec.edu.ec;
+package ec.edu.uce;
 
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
@@ -16,7 +16,7 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            
+            System.out.println();
             
             return 0;
 

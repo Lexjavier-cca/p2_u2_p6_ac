@@ -2,8 +2,8 @@ package ec.edu.uce;
 
 import java.time.LocalDate;
 
-import ec.edu.uce.application.service.EstudianteService;
-import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.application.service.ProfesorService;
+import ec.edu.uce.domain.model.Profesor;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -18,24 +18,26 @@ public class Main {
     }
     public static class App implements QuarkusApplication{
         @Inject
-        private EstudianteService estudianteService;
+        private ProfesorService profesorService;
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            Estudiante estudiante = new Estudiante();
-            estudiante.setNombre("Alex");
-            estudiante.setApellido("Caiza");
-            estudiante.setGenero("Masculino");
-            estudiante.setFechaNacimiento(LocalDate.of(2004, 6, 4));
-            this.estudianteService.guardar(estudiante);
-            System.out.println(this.estudianteService.buscarPorId(estudiante.getId()));
-            estudiante.setApellido("Calispa");
-            this.estudianteService.actualizar(estudiante);
-            System.out.println(this.estudianteService.buscarPorId(estudiante.getId()));
-            this.estudianteService.eliminar(estudiante.getId());
-            System.out.println();
-            
-            return 0;
+            System.out.println("Creando un profesor");
+            Profesor profesor1 = new Profesor();
+            profesor1.setNombre("Alex");
+            profesor1.setApellido("Caiza");
+            profesor1.setAsignatura("Programacion Avanzada 2");
+            profesor1.setGenero("Masculino");
+            profesor1.setFechaNacimiento(LocalDate.of(2004, 6, 4));
+            System.out.println("CRUD del profesor");
+            this.profesorService.guardar(profesor1);
+            System.out.println(this.profesorService.buscarPorId(profesor1.getId()));
+            profesor1.setAsignatura("Redes y Protocolos de comunicación");
+            this.profesorService.actualizar(profesor1);
+            System.out.println(this.profesorService.buscarPorId(profesor1.getId()));
+            this.profesorService.eliminar(profesor1.getId());
+
+            return 0;   
 
             
         }

@@ -1,5 +1,7 @@
 package ec.edu.uce.application.service;
 
+import java.util.List;
+
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.repositoy.EstudianteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,5 +22,14 @@ public class EstudianteService {
     }
     public void eliminar(Integer id){
         this.estudianteRepository.eliminar(id);
+    }
+    public List<Estudiante> buscarTodos(){
+        return this.estudianteRepository.seleccionarTodos();
+    }
+    public List<Estudiante> buscarPorNombre(String nombre){
+        return this.estudianteRepository.seleccionarPorNombre(nombre);
+    }
+    public Estudiante buscarPorCedula(String cedula){
+        return this.estudianteRepository.seleccionarPorCedula(cedula);
     }
 }

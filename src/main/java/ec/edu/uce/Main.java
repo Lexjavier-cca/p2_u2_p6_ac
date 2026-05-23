@@ -8,7 +8,7 @@ import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import jakarta.inject.Inject;
-
+import java.util.List;
 @QuarkusMain
 public class Main {
     public static void main(String[] args) {
@@ -22,19 +22,20 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            Estudiante estudiante = new Estudiante();
-            estudiante.setNombre("Alex");
-            estudiante.setApellido("Caiza");
-            estudiante.setGenero("Masculino");
-            estudiante.setFechaNacimiento(LocalDate.of(2004, 6, 4));
-            this.estudianteService.guardar(estudiante);
-            System.out.println(this.estudianteService.buscarPorId(estudiante.getId()));
-            estudiante.setApellido("Calispa");
-            this.estudianteService.actualizar(estudiante);
-            System.out.println(this.estudianteService.buscarPorId(estudiante.getId()));
-            this.estudianteService.eliminar(estudiante.getId());
-            System.out.println();
-            
+            System.out.println("Mostrando todos los estudiantes");
+
+            List<Estudiante> lista = this.estudianteService.buscarTodos();
+
+            for (Estudiante e : lista) {
+               System.out.println(e);
+            }
+            System.out.println("Mostrando estudiantes por nombre Alex");
+            List<Estudiante> lista2 = this.estudianteService.buscarPorNombre("Alex");
+            for (Estudiante e : lista2) {
+               System.out.println(e);
+            }  
+            System.out.println("Mostrando estudiantes por cedula 1104681237");
+            System.out.println(this.estudianteService.buscarPorCedula("1104681237"));
             return 0;
 
             

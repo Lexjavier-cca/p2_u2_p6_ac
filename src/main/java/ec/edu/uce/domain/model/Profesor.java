@@ -18,6 +18,8 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_profesor_generador") 
     @Column(name = "prof_id")
     private Integer id;
+    @Column(name = "prof_cedula")
+    private String cedula;
     @Column(name = "prof_nombre")
     private String nombre;  
     @Column(name = "prof_apellido")
@@ -28,22 +30,35 @@ public class Profesor {
     private String genero;
     @Column(name = "prof_fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    @Column(name = "prof_correo")
+    private String correo;
+    @Column(name = "prof_telefono")
+    private String telefono;
     public Profesor() {
     } 
-    public Profesor(Integer id, String nombre, String apellido, String asignatura, String genero,
-            LocalDate fechaNacimiento) {
+    public Profesor(Integer id, String cedula,String nombre, String apellido, String asignatura, String genero,
+            LocalDate fechaNacimiento, String correo, String telefono) {
         this.id = id;
+        this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.asignatura = asignatura;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
+        this.correo = correo;
+        this.telefono = telefono;
     }
     public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
+    }
+    public String getCedula() {
+        return cedula;
+    }
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
     public String getNombre() {
         return nombre;
@@ -74,11 +89,23 @@ public class Profesor {
     }
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }   
+    }
+    public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    public String getTelefono() {
+        return telefono;
+    }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     @Override
     public String toString() {
-        return "Profesor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", asignatura=" + asignatura
-                + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + "]";
+        return "Profesor [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", asignatura=" + asignatura
+                + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", correo=" + correo + ", telefono=" + telefono + "]";
     }
 
 

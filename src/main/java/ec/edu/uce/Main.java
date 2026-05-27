@@ -1,6 +1,6 @@
 package ec.edu.uce;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.domain.model.Profesor;
@@ -22,21 +22,22 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            System.out.println("Creando un profesor");
-            Profesor profesor1 = new Profesor();
-            profesor1.setNombre("Alex");
-            profesor1.setApellido("Caiza");
-            profesor1.setAsignatura("Programacion Avanzada 2");
-            profesor1.setGenero("Masculino");
-            profesor1.setFechaNacimiento(LocalDate.of(2004, 6, 4));
-            System.out.println("CRUD del profesor");
-            this.profesorService.guardar(profesor1);
-            System.out.println(this.profesorService.buscarPorId(profesor1.getId()));
-            profesor1.setAsignatura("Redes y Protocolos de comunicación");
-            this.profesorService.actualizar(profesor1);
-            System.out.println(this.profesorService.buscarPorId(profesor1.getId()));
-            this.profesorService.eliminar(profesor1.getId());
-
+            System.out.println("Consultas con profesores");
+            System.out.println("Profesores que imparten Calculo 1");
+            List<Profesor> profesoresCalculo = this.profesorService.seleccionarPorAsignatura("Calculo 1");
+            for(Profesor profesor : profesoresCalculo){
+                System.out.println(profesor);
+            }
+            System.out.println("Profesores con correo de dominio @gmail.com");
+            List<Profesor> profesoresGmail = this.profesorService.seleccionarPorCorreo( "gmail.com");
+            for(Profesor profesor : profesoresGmail){
+                System.out.println(profesor);
+            }
+            System.out.println("Profesores con cedula de Pichincha o Guayas");
+            List<Profesor> profesoresPichinchaGuayas = this.profesorService.seleccionarPorCedulaPichinchaOGuayas();
+            for(Profesor profesor : profesoresPichinchaGuayas){
+                System.out.println(profesor);
+            }
             return 0;   
 
             

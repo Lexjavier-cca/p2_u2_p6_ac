@@ -1,5 +1,7 @@
 package ec.edu.uce.application.service;
 
+import java.util.List;
+
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.repositoy.ProfesorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,5 +23,14 @@ public class ProfesorService {
     public void eliminar(Integer id){
         this.profesorRepository.eliminar(id);
     }
+    public List<Profesor> seleccionarPorAsignatura(String asignatura){
+        return this.profesorRepository.seleccionarPorAsignatura(asignatura);
+    }
+    public List<Profesor> seleccionarPorCorreo(String dominio){
+        return this.profesorRepository.seleccionarPorCorreo(dominio);
+    }
+    public List<Profesor> seleccionarPorCedulaPichinchaOGuayas(){
+        return this.profesorRepository.seleccionarPorCedulaPichinchaOGuayas();
+    }   
 
 }

@@ -45,4 +45,7 @@ public class EstudianteService {
     public Long contar(){
         return this.estudianteRepository.seleccionarContar();
     }
+    public List<Estudiante> buscarTodosNative(){
+        return this.estudianteRepository.seleccionarTodosNative();
+    }
 }

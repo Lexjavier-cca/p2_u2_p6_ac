@@ -3,9 +3,7 @@ package ec.edu.uce.infraestrucure.repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.swing.text.html.parser.Entity;
 
-import org.hibernate.query.Query;
 
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.repositoy.EstudianteRepository;
@@ -13,6 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 @ApplicationScoped
 @Transactional
@@ -74,7 +73,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
     }
 
      @Override
-     public List<Estudiante> seleccionarPorGeneroTyped(String genero) {
+    public List<Estudiante> seleccionarPorGeneroTyped(String genero) {
         // TODO Auto-generated method stub
         TypedQuery<Estudiante> miQuery = this.em.createNamedQuery("Estudiante.buscarPorGenero", Estudiante.class);
         miQuery.setParameter("genero", genero);
@@ -82,7 +81,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
      }
 
      @Override
-     public List<Estudiante> seleccionarPorRangoFecha(LocalDate fechaInicio, LocalDate fechaFin) {
+    public List<Estudiante> seleccionarPorRangoFecha(LocalDate fechaInicio, LocalDate fechaFin) {
         TypedQuery<Estudiante> miQuery = this.em.createNamedQuery("Estudiante.buscarPorRangoFecha", Estudiante.class);
         miQuery.setParameter("inicio", fechaInicio);
         miQuery.setParameter("fin", fechaFin);
@@ -94,6 +93,15 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
         return miQuery.getSingleResult();
     }
 
-    //2 N
+     
+    //2 Native Query
+    @Override
+    @SuppressWarnings("unchecked")
+     public List<Estudiante> seleccionarTodosNative() {
+          Query miQuery = this.em.createNativeQuery("SELECT * FROM estudiante", Estudiante.class);
+          return (List<Estudiante>) miQuery.getResultList();
+     }
+    
+
 
 }

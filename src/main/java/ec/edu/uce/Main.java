@@ -41,6 +41,12 @@ public class Main {
             System.out.println("Contar estudiantes");
             Long cantidad = this.estudianteService.contar();
             System.out.println("Cantidad de estudiantes: "+cantidad);
+            System.out.println("Mostrando todos los estudiantes Native Query");
+            List<Estudiante> lista4 = this.estudianteService.buscarTodosNative();
+            for(Estudiante e: lista4){
+                System.out.println(e);
+            }
+             
 
 
     

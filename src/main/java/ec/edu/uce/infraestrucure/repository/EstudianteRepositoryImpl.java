@@ -1,8 +1,11 @@
 package ec.edu.uce.infraestrucure.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.swing.text.html.parser.Entity;
+
+import org.hibernate.query.Query;
 
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.repositoy.EstudianteRepository;
@@ -62,7 +65,35 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
     
 
     }
+    //1.2 Named Query
+     @Override
+    public List<Estudiante> seleccionarPorGenero(String genero) {
+        Query miQuery = (Query) this.em.createNamedQuery("Estudiante.buscarPorGenero", Estudiante.class);
+        miQuery.setParameter("genero", genero);
+        return (List<Estudiante>) miQuery.getResultList();
+    }
 
-    //1.2 named query
+     @Override
+     public List<Estudiante> seleccionarPorGeneroTyped(String genero) {
+        // TODO Auto-generated method stub
+        TypedQuery<Estudiante> miQuery = this.em.createNamedQuery("Estudiante.buscarPorGenero", Estudiante.class);
+        miQuery.setParameter("genero", genero);
+        return miQuery.getResultList();
+     }
+
+     @Override
+     public List<Estudiante> seleccionarPorRangoFecha(LocalDate fechaInicio, LocalDate fechaFin) {
+        TypedQuery<Estudiante> miQuery = this.em.createNamedQuery("Estudiante.buscarPorRangoFecha", Estudiante.class);
+        miQuery.setParameter("inicio", fechaInicio);
+        miQuery.setParameter("fin", fechaFin);
+        return miQuery.getResultList();
+     }
+     @Override
+    public Long seleccionarContar() {
+        TypedQuery<Long> miQuery = this.em.createNamedQuery("Estudiante.contarPorRangoFecha", Long.class);
+        return miQuery.getSingleResult();
+    }
+
+    //2 N
 
 }

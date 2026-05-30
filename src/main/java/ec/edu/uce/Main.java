@@ -24,18 +24,26 @@ public class Main {
             System.out.println("Conexion a una base de datos");
             System.out.println("Mostrando todos los estudiantes");
 
-            List<Estudiante> lista = this.estudianteService.buscarTodos();
-
-            for (Estudiante e : lista) {
-               System.out.println(e);
+            List<Estudiante> lista = this.estudianteService.buscarPorGenero("Masculino");
+            for(Estudiante e: lista){
+                System.out.println(e);
             }
-            System.out.println("Mostrando estudiantes por nombre Alex");
-            List<Estudiante> lista2 = this.estudianteService.buscarPorNombre("Alex");
-            for (Estudiante e : lista2) {
-               System.out.println(e);
-            }  
-            System.out.println("Mostrando estudiantes por cedula 1104681237");
-            System.out.println(this.estudianteService.buscarPorCedula("1104681237"));
+            System.out.println("Mostrando todos los estudiantes Query");
+            List<Estudiante> lista2 = this.estudianteService.buscarPorGeneroTyped("Masculino");
+            for(Estudiante e: lista2){
+                System.out.println(e);
+            }
+            System.out.println("Mostrando todos los estudiantes por rango de fecha,2000");
+            List<Estudiante> lista3 = this.estudianteService.buscarPorRangoFecha(LocalDate.of(2004, 1, 1), LocalDate.of(2004, 12, 31));
+            for(Estudiante e: lista3){
+                System.out.println(e);
+            }
+            System.out.println("Contar estudiantes");
+            Long cantidad = this.estudianteService.contar();
+            System.out.println("Cantidad de estudiantes: "+cantidad);
+
+
+    
             return 0;
 
             

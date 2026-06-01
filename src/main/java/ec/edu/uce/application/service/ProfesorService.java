@@ -1,5 +1,6 @@
 package ec.edu.uce.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ec.edu.uce.domain.model.Profesor;
@@ -43,6 +44,18 @@ public class ProfesorService {
     }
     public List<Profesor> buscarPorGeneroFemenino(){
         return this.profesorRepository.buscarPorGeneroFemenino();
-    }   
+    }  
+    public List<Profesor> seleccionarTodosNative(){
+        return this.profesorRepository.seleccionarTodosNative();
+    }
+    public List<Profesor> seleccionarPorRangodeFechadeNacimiento(LocalDate inicio, LocalDate fin){
+        return this.profesorRepository.seleccionarPorRangodeFechadeNacimiento(inicio, fin);
+    }
+    public List<Profesor> seleccionarPorCedulaGuayasyTelefono(Integer fin){
+        return this.profesorRepository.seleccionarPorCedulaGuayasyTelefono(fin);
+    }
+    public Long contarProfesoresConIDMayorA(Integer id){
+        return this.profesorRepository.contarProfesoresConIDMayorA(id);
+    } 
 
 }

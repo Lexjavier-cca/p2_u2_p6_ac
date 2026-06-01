@@ -1,5 +1,6 @@
 package ec.edu.uce.infraestrucure.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ec.edu.uce.domain.model.Profesor;
@@ -81,6 +82,34 @@ public class ProfesorRepositoryImpl implements ProfesorRepository {
     public List<Profesor> buscarPorGeneroFemenino() {
         Query query = this.em.createNamedQuery("Profesor.buscarPorGeneroFemenino", Profesor.class);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> seleccionarTodosNative() {
+        Query query = this.em.createNativeQuery("SELECT * FROM profesor", Profesor.class);
+        return (List<Profesor>) query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> seleccionarPorRangodeFechadeNacimiento(LocalDate inicio, LocalDate fin) {
+        Query query = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_fecha_nacimiento BETWEEN :inicio AND :fin", Profesor.class);
+        query.setParameter("inicio", inicio);
+        query.setParameter("fin", fin);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> seleccionarPorCedulaGuayasyTelefono(Integer fin) {
+        Query query = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_cedula LIKE '09%' AND prof_telefono LIKE :fin", Profesor.class);
+        query.setParameter("fin", "%" + fin);
+        return  (List<Profesor>)query.getResultList();
+    }
+
+    @Override
+    public Long contarProfesoresConIDMayorA(Integer id) {
+        Query query = this.em.createNativeQuery("SELECT COUNT(*) FROM profesor WHERE prof_id > :id");
+        query.setParameter("id", id);
+        return (Long) query.getSingleResult();
     }
 
 }

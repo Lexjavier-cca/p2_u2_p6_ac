@@ -7,6 +7,7 @@ import ec.edu.uce.domain.repositoy.ProfesorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -55,6 +56,30 @@ public class ProfesorRepositoryImpl implements ProfesorRepository {
     @Override
     public List<Profesor> seleccionarPorCedulaPichinchaOGuayas() {
         TypedQuery<Profesor> query = this.em.createQuery("SELECT p FROM Profesor p WHERE p.cedula LIKE '17%' OR p.cedula LIKE '09%'", Profesor.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> buscarPorCedulaPichincha() {
+        Query query = this.em.createNamedQuery("Profesor.buscarPorCedulaPichincha", Profesor.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public Long contarProfesoresCalculo() {
+        Query query = this.em.createNamedQuery("Profesor.contarProfesoresCalculo", Long.class);
+        return (Long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Profesor> buscarPorCorreoInstitucional() {
+        Query query = this.em.createNamedQuery("Profesor.buscarPorCorreoInstitucional", Profesor.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Profesor> buscarPorGeneroFemenino() {
+        Query query = this.em.createNamedQuery("Profesor.buscarPorGeneroFemenino", Profesor.class);
         return query.getResultList();
     }
 

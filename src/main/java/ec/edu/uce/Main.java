@@ -23,21 +23,23 @@ public class Main {
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
             System.out.println("Consultas con profesores");
-            System.out.println("Profesores que imparten Calculo 1");
-            List<Profesor> profesoresCalculo = this.profesorService.seleccionarPorAsignatura("Calculo 1");
-            for(Profesor profesor : profesoresCalculo){
-                System.out.println(profesor);
+            System.out.println("Profesores con cédula de Pichincha: " );
+            List<Profesor> profesoresPichincha = this.profesorService.buscarPorCedulaPichincha();
+            for(Profesor p: profesoresPichincha){
+                System.out.println(p);
             }
-            System.out.println("Profesores con correo de dominio @gmail.com");
-            List<Profesor> profesoresGmail = this.profesorService.seleccionarPorCorreo( "gmail.com");
-            for(Profesor profesor : profesoresGmail){
-                System.out.println(profesor);
+            System.out.println("Cantidad de profesores que imparten cálculo: " + this.profesorService.contarProfesoresCalculo());
+            System.out.println("Profesores con correo institucional: " );
+            List<Profesor> profesoresCorreoInstitucional = this.profesorService.buscarPorCorreoInstitucional();
+            for(Profesor p: profesoresCorreoInstitucional){
+                System.out.println(p);
             }
-            System.out.println("Profesores con cedula de Pichincha o Guayas");
-            List<Profesor> profesoresPichinchaGuayas = this.profesorService.seleccionarPorCedulaPichinchaOGuayas();
-            for(Profesor profesor : profesoresPichinchaGuayas){
-                System.out.println(profesor);
+            System.out.println("Profesores de género femenino: " );
+            List<Profesor> profesoresGeneroFemenino = this.profesorService.buscarPorGeneroFemenino();
+            for(Profesor p: profesoresGeneroFemenino){
+                System.out.println(p);
             }
+
             return 0;   
 
             

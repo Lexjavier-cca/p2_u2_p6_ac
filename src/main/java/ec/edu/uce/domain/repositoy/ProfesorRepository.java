@@ -12,4 +12,8 @@ public interface ProfesorRepository {
     public List<Profesor> seleccionarPorAsignatura(String asignatura);
     public List<Profesor> seleccionarPorCorreo(String dominio);
     public List<Profesor> seleccionarPorCedulaPichinchaOGuayas();
+    public List<Profesor> buscarPorCedulaPichincha();
+    public Long contarProfesoresCalculo();
+    public List<Profesor> buscarPorCorreoInstitucional();
+    public List<Profesor> buscarPorGeneroFemenino();
 }

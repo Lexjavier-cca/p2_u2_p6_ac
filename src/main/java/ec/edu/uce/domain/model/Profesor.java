@@ -7,11 +7,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "profesor")
+@NamedQueries({
+    @NamedQuery(name = "Profesor.buscarPorCedulaPichincha", query = "SELECT p FROM Profesor p WHERE p.cedula LIKE '17%'"),
+    @NamedQuery(name = "Profesor.contarProfesoresCalculo", query = "SELECT COUNT(p) FROM Profesor p WHERE p.asignatura LIKE 'Calculo%'"),
+    @NamedQuery(name = "Profesor.buscarPorCorreoInstitucional", query = "SELECT p FROM Profesor p WHERE p.correo LIKE '%@uce.edu.ec%'"),
+    @NamedQuery(name = "Profesor.buscarPorGeneroFemenino", query = "SELECT p FROM Profesor p WHERE p.genero = 'Femenino'")
+})
 public class Profesor {
     @Id
     @SequenceGenerator(name = "seq_profesor_generador", sequenceName = "seq_profesor", allocationSize = 1) 

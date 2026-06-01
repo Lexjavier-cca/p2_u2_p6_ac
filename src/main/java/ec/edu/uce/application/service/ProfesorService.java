@@ -31,6 +31,18 @@ public class ProfesorService {
     }
     public List<Profesor> seleccionarPorCedulaPichinchaOGuayas(){
         return this.profesorRepository.seleccionarPorCedulaPichinchaOGuayas();
+    }
+    public List<Profesor> buscarPorCedulaPichincha(){
+        return this.profesorRepository.buscarPorCedulaPichincha();
+    }
+    public Long contarProfesoresCalculo(){
+        return this.profesorRepository.contarProfesoresCalculo();
+    }
+    public List<Profesor> buscarPorCorreoInstitucional(){
+        return this.profesorRepository.buscarPorCorreoInstitucional();
+    }
+    public List<Profesor> buscarPorGeneroFemenino(){
+        return this.profesorRepository.buscarPorGeneroFemenino();
     }   
 
 }

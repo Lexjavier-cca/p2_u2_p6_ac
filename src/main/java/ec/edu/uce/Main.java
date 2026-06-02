@@ -22,34 +22,38 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            System.out.println("Mostrando todos los estudiantes");
 
-            List<Estudiante> lista = this.estudianteService.buscarPorGenero("Masculino");
-            for(Estudiante e: lista){
+            System.out.println("Mostrando todos los estudiantes Criteria");
+            List<Estudiante> lista5 = this.estudianteService.buscarTodosCriteria();
+            for(Estudiante e: lista5){
+                System.out.println(e.getNombre() + " " + e.getApellido());
+            }
+            System.out.println("Mostrando por nombre Criteria");
+            List<Estudiante> lista6 = this.estudianteService.buscarPorNombreCriteria("Alma");
+            for(Estudiante e: lista6){
                 System.out.println(e);
             }
-            System.out.println("Mostrando todos los estudiantes Query");
-            List<Estudiante> lista2 = this.estudianteService.buscarPorGeneroTyped("Masculino");
-            for(Estudiante e: lista2){
+            System.out.println("Mostrando por nombre y apellido Criteria");
+            List<Estudiante> lista7 = this.estudianteService.buscarDinamicoCriteria("Alex", "Caiza");
+            for(Estudiante e: lista7){
+                System.out.println(e.getNombre() + " " + e.getApellido());
+            }
+            System.out.println("Mostrando por nombre y apellido Criteria con null");
+            List<Estudiante> lista8 = this.estudianteService.buscarDinamicoCriteria(null, null);
+            for(Estudiante e: lista8){
                 System.out.println(e);
             }
-            System.out.println("Mostrando todos los estudiantes por rango de fecha,2000");
-            List<Estudiante> lista3 = this.estudianteService.buscarPorRangoFecha(LocalDate.of(2004, 1, 1), LocalDate.of(2004, 12, 31));
-            for(Estudiante e: lista3){
-                System.out.println(e);
+            System.out.println("Mostrando por nombre Criteria con apellido null");
+            List<Estudiante> lista9 = this.estudianteService.buscarDinamicoCriteria("Alex", null);
+            for(Estudiante e: lista9){
+                System.out.println(e.getNombre());
             }
-            System.out.println("Contar estudiantes");
-            Long cantidad = this.estudianteService.contar();
-            System.out.println("Cantidad de estudiantes: "+cantidad);
-            System.out.println("Mostrando todos los estudiantes Native Query");
-            List<Estudiante> lista4 = this.estudianteService.buscarTodosNative();
-            for(Estudiante e: lista4){
-                System.out.println(e);
+            System.out.println("Mostrando por apellido Criteria con nombre null");
+            List<Estudiante> lista10 = this.estudianteService.buscarDinamicoCriteria(null, "Caiza");
+            for(Estudiante e: lista10){
+                System.out.println(e.getApellido());
             }
-             
 
-
-    
             return 0;
 
             

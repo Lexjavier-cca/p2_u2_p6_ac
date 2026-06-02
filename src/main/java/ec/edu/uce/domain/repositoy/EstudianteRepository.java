@@ -18,5 +18,8 @@ public interface EstudianteRepository {
     public List<Estudiante> seleccionarPorRangoFecha(LocalDate fechaInicio, LocalDate fechaFin);
     public Long seleccionarContar();
     public List<Estudiante> seleccionarTodosNative();
+    public List<Estudiante> seleccionarTodosCriteria();
+    public List<Estudiante> seleccionarPorNombreCriteria(String nombre);
+    public List<Estudiante> seleccionarDinamicoCriteria(String nombre, String apellido);
 
 }

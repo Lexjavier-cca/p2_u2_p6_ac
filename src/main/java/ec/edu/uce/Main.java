@@ -22,6 +22,7 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
+            system.out.println("Realizando operaciones CRUD");
             Estudiante estudiante = new Estudiante();
             estudiante.setNombre("Alex");
             estudiante.setApellido("Caiza");

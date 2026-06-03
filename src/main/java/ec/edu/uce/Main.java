@@ -23,6 +23,7 @@ public class Main {
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
             system.out.println("Realizando operaciones CRUD");
+            syostem.out.println("Creando un estudiante");
             Estudiante estudiante = new Estudiante();
             estudiante.setNombre("Alex");
             estudiante.setApellido("Caiza");

@@ -1,7 +1,5 @@
 package ec.edu.uce.infraestrucure.repository;
 
-import javax.swing.text.html.parser.Entity;
-
 import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.repositoy.EstudianteRepository;
 import jakarta.enterprise.context.ApplicationScoped;

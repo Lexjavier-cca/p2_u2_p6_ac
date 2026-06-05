@@ -21,7 +21,9 @@ public interface ProfesorRepository {
     public List<Profesor> seleccionarPorRangodeFechadeNacimiento(LocalDate inicio, LocalDate fin);
     public List<Profesor> seleccionarPorCedulaGuayasyTelefono(Integer fin);
     public Long contarProfesoresConIDMayorA(Integer id);
-    
+    public List<Profesor> seleccionarTodosCriteria();
+    public List<Profesor> buscarPorApellido(String apellido);
+    public List<Profesor> seleccionarPorEdad(Integer edad);   
 
 
 }

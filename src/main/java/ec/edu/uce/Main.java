@@ -1,6 +1,5 @@
 package ec.edu.uce;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import ec.edu.uce.application.service.ProfesorService;
@@ -24,23 +23,24 @@ public class Main {
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
             System.out.println("Consultas con profesores");
-            System.out.println("Todos los profesores native");
-            List<Profesor> profesores = this.profesorService.seleccionarTodosNative();
-            for(Profesor p: profesores){
-                System.out.println(p);
+            System.out.println("Mostrar todos los profesores Criteria");
+
+            List<Profesor> profesores1 = this.profesorService.buscarTodosCriteria();
+            for(Profesor p1 : profesores1){
+                System.out.println(p1);
             }
-            System.out.println("Profesores que nacieron entre 1980 y 1990");
-            List<Profesor> profesores2 = this.profesorService.seleccionarPorRangodeFechadeNacimiento(LocalDate.of(1980, 1, 1), LocalDate.of(1990, 12, 31));
-            for(Profesor p: profesores2){
-                System.out.println(p);
+            System.out.println("Profesores con el apellido Brito");
+            List<Profesor> profesores2 = this.profesorService.encontrarPorApellido("Brito");
+            for(Profesor p2 : profesores2){
+                System.out.println(p2);
             }
-            System.out.println("Profesores con cedula que termina en 9 y telefono que termina en 9");
-            List<Profesor> profesores3 = this.profesorService.seleccionarPorCedulaGuayasyTelefono(9);
-            for(Profesor p: profesores3){
-                System.out.println(p);
+            System.out.println("Profesores con la edad de 35 años");
+            List<Profesor> profesores3 = this.profesorService.mostrarPorEdad(35);
+            for(Profesor p3 : profesores3){
+                System.out.println(p3);
             }
-            Long conteo = this.profesorService.contarProfesoresConIDMayorA(5);
-            System.out.println("Cantidad de profesores con ID mayor a 5: " + conteo);
+
+
             return 0;   
 
             

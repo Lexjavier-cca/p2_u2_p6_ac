@@ -10,6 +10,10 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
@@ -110,6 +114,43 @@ public class ProfesorRepositoryImpl implements ProfesorRepository {
         Query query = this.em.createNativeQuery("SELECT COUNT(*) FROM profesor WHERE prof_id > :id");
         query.setParameter("id", id);
         return (Long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Profesor> seleccionarTodosCriteria() {
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> cq = cb.createQuery(Profesor.class);
+        Root<Profesor> root = cq.from(Profesor.class);
+        cq.select(root);
+        TypedQuery<Profesor> query = this.em.createQuery(cq);
+        return query.getResultList();
+
+    }
+
+    @Override
+    public List<Profesor> buscarPorApellido(String apellido) {
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> cq = cb.createQuery(Profesor.class);
+        Root<Profesor> root = cq.from(Profesor.class);
+        Predicate p1 = cb.equal(root.get("apellido"), apellido);
+        cq.select(root).where(p1);
+        TypedQuery<Profesor> miQuery = this.em.createQuery(cq);
+        return miQuery.getResultList();
+         
+    }
+
+    @Override
+    public List<Profesor> seleccionarPorEdad(Integer edad) {
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> cq = cb.createQuery(Profesor.class);
+        Root<Profesor> root = cq.from(Profesor.class);
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaFin = fechaActual.minusYears(edad);
+        LocalDate fechaInicio = fechaActual.minusYears(edad +1).plusDays(1);
+        Predicate p1 = cb.between(root.get("fechaNacimiento"), fechaInicio ,fechaFin);
+        cq.select(root).where(p1);
+        TypedQuery<Profesor> query = this.em.createQuery(cq);
+        return query.getResultList();
     }
 
 }

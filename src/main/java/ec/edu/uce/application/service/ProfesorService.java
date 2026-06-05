@@ -57,5 +57,14 @@ public class ProfesorService {
     public Long contarProfesoresConIDMayorA(Integer id){
         return this.profesorRepository.contarProfesoresConIDMayorA(id);
     } 
+    public List<Profesor> buscarTodosCriteria(){
+        return this.profesorRepository.seleccionarTodosCriteria();
+    }
+    public List<Profesor> encontrarPorApellido(String apellido){
+        return this.profesorRepository.buscarPorApellido(apellido);
+    }
+    public List<Profesor> mostrarPorEdad(Integer edad){
+        return this.profesorRepository.seleccionarPorEdad(edad);
+    }
 
 }

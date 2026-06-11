@@ -1,13 +1,18 @@
 package ec.edu.uce;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import ec.edu.uce.application.service.CiudadanoService;
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.domain.model.Ciudadano;
 import ec.edu.uce.domain.model.Estudiante;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 @QuarkusMain
 public class Main {
@@ -17,43 +22,19 @@ public class Main {
        
     }
     public static class App implements QuarkusApplication{
+      
         @Inject
-        private EstudianteService estudianteService;
+        private CiudadanoService ciud;
+      
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
+            Ciudadano ciudadano1 = new Ciudadano(10 , "Alex C",LocalDateTime.of(2005, 7, 30, 1, 3));
+            this.ciud.guardar(ciudadano1);
+            
 
-            System.out.println("Mostrando todos los estudiantes Criteria");
-            List<Estudiante> lista5 = this.estudianteService.buscarTodosCriteria();
-            for(Estudiante e: lista5){
-                System.out.println(e.getNombre() + " " + e.getApellido());
-            }
-            System.out.println("Mostrando por nombre Criteria");
-            List<Estudiante> lista6 = this.estudianteService.buscarPorNombreCriteria("Alma");
-            for(Estudiante e: lista6){
-                System.out.println(e);
-            }
-            System.out.println("Mostrando por nombre y apellido Criteria");
-            List<Estudiante> lista7 = this.estudianteService.buscarDinamicoCriteria("Alex", "Caiza");
-            for(Estudiante e: lista7){
-                System.out.println(e.getNombre() + " " + e.getApellido());
-            }
-            System.out.println("Mostrando por nombre y apellido Criteria con null");
-            List<Estudiante> lista8 = this.estudianteService.buscarDinamicoCriteria(null, null);
-            for(Estudiante e: lista8){
-                System.out.println(e);
-            }
-            System.out.println("Mostrando por nombre Criteria con apellido null");
-            List<Estudiante> lista9 = this.estudianteService.buscarDinamicoCriteria("Alex", null);
-            for(Estudiante e: lista9){
-                System.out.println(e.getNombre());
-            }
-            System.out.println("Mostrando por apellido Criteria con nombre null");
-            List<Estudiante> lista10 = this.estudianteService.buscarDinamicoCriteria(null, "Caiza");
-            for(Estudiante e: lista10){
-                System.out.println(e.getApellido());
-            }
-
+            
+            
             return 0;
 
             

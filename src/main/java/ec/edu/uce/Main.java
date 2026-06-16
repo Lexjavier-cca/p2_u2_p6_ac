@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import ec.edu.uce.application.service.CiudadanoService;
+import ec.edu.uce.application.service.EmpleadoService;
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.domain.model.Ciudadano;
+import ec.edu.uce.domain.model.Empleado;
 import ec.edu.uce.domain.model.Estudiante;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
@@ -25,12 +27,30 @@ public class Main {
       
         @Inject
         private CiudadanoService ciud;
+        
+        @Inject
+        private EmpleadoService empl;
       
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            Ciudadano ciudadano1 = new Ciudadano(10 , "Alex C",LocalDateTime.of(2005, 7, 30, 1, 3));
-            this.ciud.guardar(ciudadano1);
+            System.out.println("Insertando un ciudadado");
+            Ciudadano ciudadano1 = new Ciudadano();
+            ciudadano1.setNombre("Pere Milla");
+            ciudadano1.setFecha_nacimiento(LocalDateTime.of(1991, 6, 7,4,0));
+
+            
+            
+
+            //this.ciud.guardar(ciudadano1);
+           // System.out.println(ciudadano1.getId());
+            System.out.println("Insertando un empleado");
+            Empleado empleado1 = new Empleado();
+            empleado1.setSalario(null);
+            empleado1.setFechaIngreso(LocalDateTime.of(2024,11,13,8,0));
+            empleado1.setCiudadano(ciudadano1);
+            this.empl.guardar(empleado1);
+            
             
 
             

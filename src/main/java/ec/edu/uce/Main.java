@@ -26,22 +26,25 @@ public class Main {
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            System.out.println("Creando un profesor y un contrato");
+            System.out.println("Creando un profesor");
             Profesor profesor = new Profesor();
-            System.out.println("Profesor con id 17");
-            profesor.setNombre("Ariel");
-            profesor.setApellido("Morocho");
-            profesor.setCedula("1722603291");
+            profesor.setNombre("Ezequiel");
+            profesor.setApellido("Lavezi");
+            profesor.setCedula("1722603790");
             profesor.setGenero("Masculino");
-            profesor.setCorreo("alan@gmail.com");
-            profesor.setTelefono("0998752140");
-            profesor.setAsignatura("Ecuaciones Diferenciales");
-            profesor.setFechaNacimiento(LocalDate.of(1985, 4, 21));
-            //this.profesorService.guardar(profesor);
+            profesor.setCorreo("ezequiel@gmail.com");
+            profesor.setTelefono("0998752130");
+            profesor.setAsignatura("Programacion Grafica");
+            profesor.setFechaNacimiento(LocalDate.of(1983, 5, 17));
+            System.out.println(profesor);
+            
+
+            System.out.println("----------Insertando un contrato y seteando un profesor----------");
             Contrato contrato = new Contrato();
-            contrato.setFechaInicio(LocalDate.of(2026, 6, 11));
-            contrato.setSalario(1200.0);
+            contrato.setFechaInicio(LocalDate.of(2026, 3, 4));
+            contrato.setSalario(1800.00);
             contrato.setProfesor(profesor);
+            System.out.println(contrato);
             this.contratoService.guardar(contrato);
             
             

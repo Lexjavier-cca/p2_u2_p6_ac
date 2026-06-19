@@ -1,11 +1,14 @@
 package ec.edu.uce;
 
-import java.time.LocalDate;
 
-import ec.edu.uce.application.service.ContratoService;
-import ec.edu.uce.application.service.ProfesorService;
-import ec.edu.uce.domain.model.Contrato;
-import ec.edu.uce.domain.model.Profesor;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ec.edu.uce.application.service.EquipoService;
+import ec.edu.uce.domain.model.Equipo;
+import ec.edu.uce.domain.model.Jugador;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -20,39 +23,33 @@ public class Main {
     }
     public static class App implements QuarkusApplication{
         @Inject
-        private ProfesorService profesorService;
-        @Inject
-        private ContratoService contratoService;
+        private EquipoService equipoService;
+
         @Override
         public int run(String... args) throws Exception {
             System.out.println("Conexion a una base de datos");
-            System.out.println("Creando un profesor");
-            Profesor profesor = new Profesor();
-            profesor.setNombre("Ezequiel");
-            profesor.setApellido("Lavezi");
-            profesor.setCedula("1722603790");
-            profesor.setGenero("Masculino");
-            profesor.setCorreo("ezequiel@gmail.com");
-            profesor.setTelefono("0998752130");
-            profesor.setAsignatura("Programacion Grafica");
-            profesor.setFechaNacimiento(LocalDate.of(1983, 5, 17));
-            System.out.println(profesor);
-            
-
-            System.out.println("----------Insertando un contrato y seteando un profesor----------");
-            Contrato contrato = new Contrato();
-            contrato.setFechaInicio(LocalDate.of(2026, 3, 4));
-            contrato.setSalario(1800.00);
-            contrato.setProfesor(profesor);
-            System.out.println(contrato);
-            this.contratoService.guardar(contrato);
-            
-            
-
-
+            System.out.println("Creando un equipo");
+            Equipo equipo = new Equipo();
+            equipo.setNombre("Real Madrid");
+            equipo.setCiudad("Madrid");
+            equipo.setTrofeos(15);
+            Jugador jugador1 = new Jugador();
+            jugador1.setNombre("Andry Lunin");
+            jugador1.setDorsal(13);
+            jugador1.setPosicion("Portero");
+            jugador1.setEquipo(equipo);
+            Jugador jugador2 = new Jugador();
+            jugador2.setNombre("Kylian Mbappe");
+            jugador2.setDorsal(9);
+            jugador2.setPosicion("Delantero");
+            jugador2.setEquipo(equipo);
+            List<Jugador> jugadores = new ArrayList<>();
+            jugadores.add(jugador1);
+            jugadores.add(jugador2);
+            equipo.setJugadores(jugadores);
+            this.equipoService.guardar(equipo);
             return 0;   
-
-            
+        
         }
     }
 

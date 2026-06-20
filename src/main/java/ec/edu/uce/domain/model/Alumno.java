@@ -3,8 +3,10 @@ package ec.edu.uce.domain.model;
 import java.util.List;
 
 import io.smallrye.context.api.ManagedExecutorConfig;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +26,7 @@ public class Alumno {
     private Integer id;
     @Column(name = "alum_nombre")
     private String nombre;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "alumno_materia", joinColumns = @JoinColumn(name = "alma_id_alumno"), inverseJoinColumns = @JoinColumn(name = "alma_id_materia"))
     private List<Materia> materias;
     public Alumno(){

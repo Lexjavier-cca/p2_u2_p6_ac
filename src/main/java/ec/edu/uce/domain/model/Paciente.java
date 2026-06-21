@@ -1,13 +1,17 @@
 package ec.edu.uce.domain.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-
 @Entity
 @Table(name = "paciente")
 public class Paciente {
@@ -20,6 +24,8 @@ public class Paciente {
     private String nombre;
     @Column(name = "paci_padecimiento")
     private String padecimiento;
+    @ManyToMany(mappedBy= "pacientes", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Medico> medicos;
     public Paciente(){
 
     }
@@ -46,10 +52,20 @@ public class Paciente {
     public void setPadecimiento(String padecimiento) {
         this.padecimiento = padecimiento;
     }
+    public List<Medico> getMedicos() {
+        return medicos;
+    }
+    public void setMedicos(List<Medico> medicos) {
+        this.medicos = medicos;
+    }
     @Override
     public String toString() {
-        return "Paciente [id=" + id + ", nombre=" + nombre + ", padecimiento=" + padecimiento + "]";
+        return "Paciente [id=" + id + ", nombre=" + nombre + ", padecimiento=" + padecimiento 
+                + "]";
     }
+    
+
+    
     
     
     

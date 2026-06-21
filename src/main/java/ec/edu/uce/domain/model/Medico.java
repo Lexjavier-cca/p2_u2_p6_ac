@@ -1,8 +1,10 @@
 package ec.edu.uce.domain.model;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +25,7 @@ public class Medico {
     private String nombre;
     @Column(name = "medi_especialidad")
     private String especialidad;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "medico_paciente",joinColumns = @JoinColumn(name = "mepa_id_medico"),inverseJoinColumns = @JoinColumn(name = "mepa_id_paciente"))
     private List<Paciente> pacientes;
     public Medico(){
@@ -60,7 +62,7 @@ public class Medico {
     }
     @Override
     public String toString() {
-        return "Medico [id=" + id + ", nombre=" + nombre + ", especialidad=" + especialidad + ", pacientes=" + pacientes
+        return "Medico [id=" + id + ", nombre=" + nombre + ", especialidad=" + especialidad 
                 + "]";
     }
     
